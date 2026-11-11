@@ -22,3 +22,4 @@ Todos os comandos necessários para rodar a aplicação, testar e visualizar os 
   npm run dev
   npm i && npx playwright test
   npx playwright show-report
+  Caso Trave: npx playwright test --ui
