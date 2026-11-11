@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Far Far Away CRM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('SHREK.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-200 p-8 font-sans">
+    <header class="mb-8 max-w-6xl mx-auto">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-xl">🧅</div>
+            <div>
+                <h1 class="text-sm font-bold text-red-400 tracking-wider">FAR FAR AWAY CRM</h1>
+                <p class="text-xs text-gray-400">Gestão de Criaturas & Visitantes</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Formulário de Cadastro -->
+        <section class="glass p-8 rounded-2xl border border-gray-700 shadow-2xl h-fit">
+            <span class="bg-green-900/50 border border-green-700 text-green-400 text-[10px] font-bold px-2 py-1 rounded mb-4 inline-block tracking-widest uppercase">
+                ✏️ Novo Registro Oficial
+            </span>
+            <h2 class="text-2xl font-bold mb-2 text-white">Cadastro de Clientes</h2>
+            <p class="text-sm text-gray-400 mb-8 leading-relaxed">Insira os dados do visitante para conceder livre passagem pelas terras do Pântano.</p>
+            
+            <div class="mb-6">
+                <label for="nome" class="block text-sm font-medium mb-2 text-gray-300">Nome do Cliente *</label>
+                <div class="relative">
+                    <input type="text" id="nome" placeholder="Ex: Lord Farquaad, Fiona, Pinóquio..." 
+                        class="w-full bg-gray-900/80 border border-gray-700 rounded-lg p-3 text-white placeholder-gray-600 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all">
+                </div>
+                <div id="erro-nome" role="alert" class="hidden text-red-400 text-xs mt-2 font-medium">O nome do cliente é obrigatório.</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div>
+                    <label class="block text-xs font-medium mb-2 text-gray-400">Origem / Reino</label>
+                    <select class="w-full bg-gray-900/80 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-green-500 appearance-none">
+                        <option>Pântano Local</option>
+                        <option>Tão Tão Distante</option>
+                        <option>Reino de Duloc</option>
+                        <option>Floresta Encantada</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium mb-2 text-gray-400">Status Inicial</label>
+                    <select class="w-full bg-gray-900/80 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-green-500 appearance-none">
+                        <option>Aprovado pelo Ogro</option>
+                        <option>VIP do Castelo</option>
+                        <option>Na Lama (Em Análise)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="btn-cadastrar" class="w-full bg-green-500 hover:bg-green-600 text-gray-900 font-bold py-3 px-4 rounded-lg transition-colors shadow-lg shadow-green-500/20 flex justify-center items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                Cadastrar
+            </button>
+        </section>
+        
+        <!-- Lista de Cadastrados -->
+        <section class="glass p-8 rounded-2xl border border-gray-700 shadow-2xl md:col-span-2 flex flex-col">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-xl font-bold text-white">Clientes Cadastrados:</h2>
+                        <span id="contador" class="bg-green-900/80 border border-green-700 text-green-300 text-xs font-bold px-3 py-1 rounded-full">0 cadastros</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Registros autorizados pelo ogro supremo</p>
+                </div>
+                <div class="relative w-full sm:w-64">
+                    <input type="text" placeholder="Buscar cliente..." class="w-full bg-gray-900/80 border border-gray-700 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-green-500">
+                    <svg class="w-4 h-4 text-gray-500 absolute left-4 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+            
+            <ul id="lista" class="space-y-3 flex-1 overflow-y-auto"></ul>
+            
+            <div class="mt-6 pt-6 border-t border-gray-700/50 flex justify-between items-center text-xs text-gray-500">
+                <span>Sistema Integrado com o Castelo</span>
+                <span class="flex items-center gap-1">🧅 Camadas como uma cebola</span>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const inputNome = document.getElementById('nome');
+        const btnCadastrar = document.getElementById('btn-cadastrar');
+        const erroNome = document.getElementById('erro-nome');
+        const lista = document.getElementById('lista');
+        const contador = document.getElementById('contador');
+
+        function renderizar() {
+            const clientes = JSON.parse(localStorage.getItem('shrek_crm') || '[]');
+            lista.innerHTML = '';
+            contador.textContent = `${clientes.length} cadastros`;
+            
+            clientes.forEach((nome) => {
+                const li = document.createElement('li');
+                li.className = 'bg-gray-800/50 hover:bg-gray-800 border border-gray-700 p-4 rounded-xl flex items-center justify-between transition-colors group cursor-pointer';
+                li.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center text-xl shadow-inner">
+                            ${nome.toLowerCase().includes('burro') ? '🐴' : nome.toLowerCase().includes('gato') ? '🐱' : nome.toLowerCase().includes('biscoito') ? '🍪' : '👑'}
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-3 mb-1">
+                                <span class="font-bold text-white text-base">${nome}</span>
+                                <span class="bg-green-900/50 border border-green-700 text-green-400 text-[9px] px-2 py-0.5 rounded uppercase font-bold tracking-wider">Aprovado pelo Ogro</span>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-400 gap-2">
+                                <span class="flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> Pântano Local</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="text-gray-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity p-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                `;
+                lista.appendChild(li);
+            });
+        }
+
+        btnCadastrar.addEventListener('click', () => {
+            const nome = inputNome.value.trim();
+            if (!nome) {
+                erroNome.classList.remove('hidden');
+                return;
+            }
+            erroNome.classList.add('hidden');
+            const clientes = JSON.parse(localStorage.getItem('shrek_crm') || '[]');
+            clientes.push(nome);
+            localStorage.setItem('shrek_crm', JSON.stringify(clientes));
+            inputNome.value = '';
+            renderizar();
+        });
+
+        renderizar();
+    </script>
+</body>
+</html>
